@@ -1,625 +1,496 @@
+<!-- =========================
+SEGMENT 1 OF 2
+========================= -->
 <!DOCTYPE html>
 <html>
 <head>
-
+  <!-- Mobirise Core -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v6.0.6, mobirise.com">
+  <meta name="generator" content="Mobirise v6.0.6">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="icon" type="image/png" href="assets/images/screenshot202026-02-1120003244-94x85.png?v=1">
-  <link rel="shortcut icon" type="image/png" href="assets/images/screenshot202026-02-1120003244-94x85.png?v=1">
-  <meta name="description" content="">
-  <title>Join the Fight</title>
 
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+  <title>Vote for Daley - Profile Maker</title>
+
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/web/assets/gdpr-plugin/gdpr-styles.css">
-  <link rel="stylesheet" href="assets/animatecss/animate.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Anek+Latin:100,200,300,400,500,600,700,800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anek+Latin:100,200,300,400,500,600,700,800&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=19d8aE">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=19d8aE" type="text/css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
   <!-- =========================
-       Tool styling (scoped)
-       Goal: match your site — clean white, red accents, no “separate app” look
+       PROFILE MAKER STYLING
+       Only styles INSIDE the box.
+       Page background remains identical to index.
        ========================= -->
   <style>
     :root{
-      --campaign-red: #ea0000;
-      --ink: #222;
-      --muted: rgba(0,0,0,0.55);
-      --line: rgba(0,0,0,0.12);
-      --soft: rgba(0,0,0,0.04);
+      --red:#ea0000;
     }
 
-    /* Main section spacing - keep it centered and not too wide */
-    #profile-tool .toolWrap{
-      padding: 56px 0;
+    /* Section spacing only */
+    #profile-tool{
+      padding:80px 0;
     }
 
-    /* White “card” area that sits on the Mobirise background */
-    #profile-tool .toolShell{
-      background: rgba(255,255,255,0.96);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.10);
-      overflow: hidden;
+    /* Outer wrapper does NOT change background */
+    #profile-tool .tool-wrapper{
+      max-width:1100px;
+      margin:auto;
     }
 
-    /* Two-column layout: controls + preview */
+    /* Inner profile maker box */
+    #profile-tool .tool-box{
+      background:rgba(7,10,22,0.75);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      padding:32px;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    /* Headline */
+    #profile-tool h2{
+      color:#fff;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    #profile-tool .subtitle{
+      color:rgba(255,255,255,0.75);
+      margin-bottom:24px;
+    }
+
+    /* Two-column layout */
     #profile-tool .grid{
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-      align-items: start;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
     }
-    @media (max-width: 992px){
-      #profile-tool .grid{ grid-template-columns: 1fr; }
-      #profile-tool .toolShell{ padding: 18px; }
-    }
-
-    /* Header */
-    #profile-tool .headline{
-      margin: 0 0 14px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      font-size: 26px;
-      line-height: 1.15;
-    }
-    @media (max-width: 600px){
-      #profile-tool .headline{ font-size: 22px; }
+    @media(max-width:992px){
+      #profile-tool .grid{
+        grid-template-columns:1fr;
+      }
     }
 
-    #profile-tool .sub{
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0 0 10px;
-    }
-
-    /* Control card blocks */
+    /* Panels */
     #profile-tool .panel{
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px;
+      background:rgba(0,0,0,0.35);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:16px;
+      padding:20px;
     }
 
-    #profile-tool .row{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-    }
-    #profile-tool .left{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-
-    /* Buttons: match nav/link red, clean outline */
-    #profile-tool .btn{
-      appearance: none;
-      border: 2px solid var(--campaign-red);
-      background: transparent;
-      color: var(--campaign-red);
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      cursor: pointer;
-      transition: transform 120ms ease, background 120ms ease, color 120ms ease;
-    }
-    #profile-tool .btn:hover{
-      background: rgba(234,0,0,0.08);
-      transform: translateY(-1px);
-    }
-    #profile-tool .btn:active{
-      transform: translateY(0px);
-    }
-    #profile-tool .btn:disabled{
-      opacity: 0.45;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Make the download button prominent and full width */
-    #profile-tool #download{
-      width: 100%;
-      justify-content: center;
-      text-align: center;
-      padding: 12px 16px;
-    }
-
-    /* Toggle controls */
-    #profile-tool .toggleWrap{
-      display:flex;
-      flex-direction: column;
-      gap: 8px;
-      min-width: 220px;
-    }
-
-    #profile-tool .toggleRow{
-      display:inline-flex;
+    /* Top controls alignment */
+    #profile-tool .controls{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
       align-items:center;
-      gap: 10px;
-      user-select:none;
+    }
+    @media(max-width:768px){
+      #profile-tool .controls{
+        grid-template-columns:1fr;
+      }
+    }
+
+    #profile-tool .button-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    /* Buttons */
+    #profile-tool .btn-red{
+      border:2px solid var(--red);
+      color:var(--red);
+      background:transparent;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:800;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    #profile-tool .btn-red:hover{
+      background:rgba(234,0,0,0.12);
+    }
+    #profile-tool .btn-red:disabled{
+      opacity:0.4;
+      cursor:not-allowed;
+    }
+
+    /* Toggle */
+    #profile-tool .toggle-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
 
     #profile-tool .pill{
-      font-size: 13px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--soft);
-      color: var(--muted);
-      font-weight: 700;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:13px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(255,255,255,0.08);
+      color:rgba(255,255,255,0.8);
+      font-weight:700;
     }
-    #profile-tool .pill.on{
-      color: var(--campaign-red);
-      border-color: rgba(234,0,0,0.35);
-      background: rgba(234,0,0,0.08);
+
+    #profile-tool .pill.active{
+      border-color:rgba(234,0,0,0.4);
+      background:rgba(234,0,0,0.15);
+      color:var(--red);
     }
 
     #profile-tool .toggle{
-      position: relative;
-      width: 58px;
-      height: 30px;
-      border-radius: 999px;
-      background: rgba(234,0,0,0.10);
-      border: 1px solid rgba(234,0,0,0.35);
+      width:60px;
+      height:30px;
+      border-radius:999px;
+      background:rgba(234,0,0,0.15);
+      position:relative;
       cursor:pointer;
-      flex: 0 0 auto;
     }
+
     #profile-tool .knob{
       position:absolute;
-      top: 3px;
-      left: 3px;
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: var(--campaign-red);
-      transition: transform 160ms ease;
+      top:3px;
+      left:3px;
+      width:24px;
+      height:24px;
+      background:var(--red);
+      border-radius:999px;
+      transition:.2s ease;
     }
-    #profile-tool .toggle[data-on="true"] .knob{ transform: translateX(28px); }
 
-    /* Status + errors */
-    #profile-tool .hint{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
+    #profile-tool .toggle[data-mode="banner"] .knob{
+      transform:translateX(30px);
     }
-    #profile-tool .error{
-      margin-top: 10px;
-      color: #b00000;
-      font-size: 13px;
-      white-space: pre-wrap;
+
+    /* Download row */
+    #profile-tool .download-row{
+      margin-top:20px;
+    }
+
+    /* Status */
+    #profile-tool .status{
+      margin-top:12px;
+      color:rgba(255,255,255,0.7);
     }
 
     /* Preview */
-    #profile-tool .previewTitle{
-      margin: 0 0 10px;
-      color: var(--ink);
-      font-weight: 800;
-      font-size: 15px;
-    }
-    #profile-tool canvas{
-      width: 100%;
-      max-width: 520px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #f3f3f3;
-      display:block;
+    #profile-tool .preview-title{
+      color:#fff;
+      font-weight:800;
+      margin-bottom:10px;
     }
 
-    /* Optional tool logo (NOT included in exported image) */
-    #profile-tool .siteLogo{
-      width: 140px;
-      height: auto;
-      display: block;
-      margin: 0 0 14px;
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
-    }
-    @media (max-width: 600px){
-      #profile-tool .siteLogo{ width: 120px; }
+    #profile-tool canvas{
+      width:100%;
+      max-width:520px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.15);
+      background:rgba(255,255,255,0.06);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- KEEP: Mobirise header/menu -->
-  <section data-bs-version="5.1" class="menu menu1 bootcampm5 cid-taHRfbmdPD" once="menu" id="amenu1-0">
-    <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-      <div class="container">
-        <div class="navbar-brand">
-          <span class="navbar-caption-wrap">
-            <a class="navbar-caption text-white text-primary display-4"
-               href="https://www.facebook.com/groups/880814651207993" target="_blank">
-              Daley for District 10
-            </a>
-          </span>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse"
-                data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <div class="hamburger">
-            <span></span><span></span><span></span><span></span>
-          </div>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-            <li class="nav-item"><a class="nav-link link text-primary display-4" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link link text-primary display-4" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link link text-primary display-4" href="policies.html">Policies</a></li>
-            <li class="nav-item"><a class="nav-link link text-primary display-4" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Donate</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link link dropdown-toggle text-primary display-4"
-                 href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
-                 data-bs-auto-close="outside" aria-expanded="false">
-                Join the Fight
-              </a>
-              <div class="dropdown-menu" aria-labelledby="dropdown-962">
-                <a class="dropdown-item text-primary display-4" href="join.html">Volunteer</a>
-                <a class="dropdown-item text-primary display-4" href="#" target="_blank">X</a>
-                <a class="dropdown-item text-primary display-4" href="#" target="_blank">Facebook</a>
-                <a class="dropdown-item text-primary display-4" href="#" target="_blank">Instagram</a>
-                <a class="dropdown-item text-primary display-4" href="profile-pic.html">"Vote for Daley" Profile Pic</a>
-              </div>
-            </li>
-          </ul>
-        </div>
+<!-- ===== HEADER (same as index) ===== -->
+<section data-bs-version="5.1" class="menu menu1 bootcampm5 cid-taHRfbmdPD" once="menu" id="amenu1-0">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <span class="navbar-caption-wrap">
+          <a class="navbar-caption text-white text-primary display-4" href="index.html">
+            Daley for District 10
+          </a>
+        </span>
       </div>
-    </nav>
-  </section>
+    </div>
+  </nav>
+</section>
 
-  <!-- ONLY CONTENT: Page 2 tool -->
-  <section data-bs-version="5.1" class="content5 bootcampm5" id="profile-tool">
-    <div class="container toolWrap">
-      <div class="row justify-content-center">
-        <div class="col-12 col-xl-10">
-          <div class="toolShell">
+<!-- ===== PROFILE TOOL SECTION ===== -->
+<section data-bs-version="5.1" class="article2 bootcampm5" id="profile-tool">
+  <div class="container tool-wrapper">
+    <div class="tool-box">
 
-            <!-- Optional: remove if you don't want a logo inside the tool -->
-            <img id="siteLogo" src="logo.png" class="siteLogo" alt="Logo" />
+      <h2>Add this to your social media profile!</h2>
+      <div class="subtitle">
+        Upload a photo or take a selfie, then download your finished PNG.
+      </div>
 
-            <h2 class="headline">Add this to your social media profile!</h2>
-            <p class="sub">Upload a photo or take a selfie, then download your finished PNG.</p>
+      <div class="grid">
 
-            <div class="grid">
-              <!-- Controls -->
-              <div class="panel">
-                <div class="row">
-                  <div class="left">
-                    <div>
-                      <div class="sub" style="margin:0 0 6px;">Add your photo</div>
-                      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-                        <button class="btn" type="button" id="btnSelfie">Take Selfie</button>
-                        <button class="btn" type="button" id="btnUpload">Upload Photo</button>
-                      </div>
+        <!-- LEFT PANEL -->
+        <div class="panel">
 
-                      <!-- Hidden inputs -->
-                      <input id="fileSelfie" type="file" accept="image/*" capture="user" style="display:none;" />
-                      <input id="fileUpload" type="file" accept="image/*" style="display:none;" />
-                    </div>
-
-                    <div class="toggleWrap">
-                      <div class="sub" style="margin:0;">Style</div>
-                      <div class="toggleRow" id="modeSwitch" aria-label="Frame style toggle">
-                        <span class="pill on" id="labelCircle">Circle</span>
-                        <div class="toggle" id="toggle" data-on="false" role="switch" aria-checked="false">
-                          <div class="knob"></div>
-                        </div>
-                        <span class="pill" id="labelCorner">Banner</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div style="margin-top:14px;">
-                  <button id="download" class="btn" disabled>Download PNG</button>
-                </div>
-
-                <div id="status" class="hint">Add a photo to begin.</div>
-                <div id="err" class="error"></div>
+          <div class="controls">
+            <div>
+              <div style="color:rgba(255,255,255,0.75);margin-bottom:8px;">Add your photo</div>
+              <div class="button-row">
+                <button class="btn-red" id="btnSelfie">Take Selfie</button>
+                <button class="btn-red" id="btnUpload">Upload Photo</button>
               </div>
 
-              <!-- Preview -->
-              <div class="panel">
-                <div class="previewTitle">Preview</div>
-                <canvas id="c" width="1080" height="1080"></canvas>
-              </div>
+              <input id="fileSelfie" type="file" accept="image/*" capture="user" style="display:none;">
+              <input id="fileUpload" type="file" accept="image/*" style="display:none;">
             </div>
 
+            <div>
+              <div style="color:rgba(255,255,255,0.75);margin-bottom:8px;">Style</div>
+              <div class="toggle-wrap">
+                <span id="labelCircle" class="pill active">Circle</span>
+                <div id="toggle" class="toggle" data-mode="circle">
+                  <div class="knob"></div>
+                </div>
+                <span id="labelBanner" class="pill">Banner</span>
+              </div>
+            </div>
           </div>
+
+          <div class="download-row">
+            <button class="btn-red" id="download" disabled>Download PNG</button>
+          </div>
+
+          <div id="status" class="status">Add a photo to begin.</div>
+
         </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="panel">
+          <div class="preview-title">Preview</div>
+          <canvas id="c" width="1080" height="1080"></canvas>
+        </div>
+
       </div>
     </div>
-  </section>
+  </div>
+</section>
 <!-- =========================
-SEGMENT 2 of 2  (PASTE AFTER SEGMENT 1)
+SEGMENT 2 OF 2
+(Paste directly after Segment 1)
 ========================= -->
 
-  <!-- KEEP: Mobirise footer -->
-  <section data-bs-version="5.1" class="footer2 bootcampm5 cid-v0q17rTNdN" once="footers" id="afooter2-d">
-    <div class="container">
-      <div class="media-container-row align-center mbr-white">
-        <div class="col-12">
-          <p class="mbr-text mb-0 mbr-fonts-style align-center display-4">
-            <a href="https://www.facebook.com/groups/880814651207993" class="text-primary" target="_blank">Dan Daley</a><br>
-            (207) 726-3370<br>
-            DanDALEY.mh10@gmail.com<br>
-            ADDRESS LEGALLY REQUIRED<br>
-            Authorized and paid for by<br>
-            I NEED THE COMMITTEE NAME
-            &nbsp;&nbsp;&nbsp;<a href="privacy.html" class="text-primary">Privacy policy</a>
-            &nbsp;&nbsp;&nbsp;<a href="https://austinstrat.com" class="text-primary">Austin Strategies</a>
-          </p>
-        </div>
+<!-- ===== FOOTER (same as index) ===== -->
+<section data-bs-version="5.1" class="footer2 bootcampm5 cid-v0q17rTNdN" once="footers" id="afooter2-d">
+  <div class="container">
+    <div class="media-container-row align-center mbr-white">
+      <div class="col-12">
+        <p class="mbr-text mb-0 mbr-fonts-style align-center display-4">
+          <a href="https://www.facebook.com/groups/880814651207993" class="text-primary" target="_blank">Dan Daley</a><br>
+          (207) 726-3370<br>
+          DanDALEY.mh10@gmail.com<br>
+          ADDRESS LEGALLY REQUIRED<br>
+          Authorized and paid for by<br>
+          I NEED THE COMMITTEE NAME
+          &nbsp;&nbsp;&nbsp;<a href="privacy.html" class="text-primary">Privacy policy</a>
+          &nbsp;&nbsp;&nbsp;<a href="https://austinstrat.com" class="text-primary">Austin Strategies</a>
+        </p>
       </div>
     </div>
-  </section>
-
-  <!-- KEEP: Mobirise scripts -->
-  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/web/assets/cookies-alert-plugin/cookies-alert-core.js"></script>
-  <script src="assets/web/assets/cookies-alert-plugin/cookies-alert-script.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
-  <script src="assets/ytplayer/index.js"></script>
-  <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-  <script src="assets/mbr-tabs/mbr-tabs.js"></script>
-  <script src="assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
-  <script src="assets/theme/js/script.js"></script>
-
-  <!-- =========================================================
-       Page 2 tool JS (functional logic)
-       Files required in SAME FOLDER as this HTML:
-         - circle.png
-         - corner.png
-         - logo.png  (optional, can remove)
-       ========================================================= -->
-  <script>
-    (() => {
-      const SIZE = 1080;
-
-      // Frame assets (same folder as this HTML file)
-      const ASSETS = {
-        circleFrame: "circle.png",
-        cornerFrame: "corner.png"
-      };
-
-      const elDownload = document.getElementById("download");
-      const elStatus   = document.getElementById("status");
-      const elErr      = document.getElementById("err");
-
-      const modeSwitch  = document.getElementById("modeSwitch");
-      const toggle      = document.getElementById("toggle");
-      const labelCircle = document.getElementById("labelCircle");
-      const labelCorner = document.getElementById("labelCorner");
-
-      const canvas = document.getElementById("c");
-      const ctx    = canvas.getContext("2d");
-
-      const elFileSelfie = document.getElementById("fileSelfie");
-      const elFileUpload = document.getElementById("fileUpload");
-      const btnSelfie    = document.getElementById("btnSelfie");
-      const btnUpload    = document.getElementById("btnUpload");
-
-      let userImg = null;
-      let lastBlobUrl = null;
-
-      // Cache images so switching styles is instant
-      const cache = new Map();
-      function loadImage(src) {
-        if (cache.has(src)) return cache.get(src);
-        const p = new Promise((resolve, reject) => {
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error("Design file missing: " + src));
-          img.src = src;
-        });
-        cache.set(src, p);
-        return p;
-      }
-
-      const setError  = (msg) => (elErr.textContent = msg || "");
-      const setStatus = (msg) => (elStatus.textContent = msg || "");
-
-      function getMode() {
-        return toggle.dataset.on === "true" ? "corner" : "circle";
-      }
-
-      function setMode(mode) {
-        const on = mode === "corner";
-        toggle.dataset.on = on ? "true" : "false";
-        toggle.setAttribute("aria-checked", on ? "true" : "false");
-        labelCircle.classList.toggle("on", !on);
-        labelCorner.classList.toggle("on", on);
-      }
-
-      function readFileAsImage(file) {
-        return new Promise((resolve, reject) => {
-          const url = URL.createObjectURL(file);
-          const img = new Image();
-          img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-          img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("That photo could not be opened. Try a different image.")); };
-          img.src = url;
-        });
-      }
-
-      // Center-crop cover to fill 1080x1080
-      function drawCover(img, dx, dy, dw, dh) {
-        const iw = img.naturalWidth || img.width;
-        const ih = img.naturalHeight || img.height;
-
-        const scale = Math.max(dw / iw, dh / ih);
-        const sw = dw / scale;
-        const sh = dh / scale;
-
-        const sx = (iw - sw) / 2;
-        const sy = (ih - sh) / 2;
-
-        ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
-      }
-
-      // Overlay without distortion; optional overscale to hide edge gaps
-      function drawOverlayContain(img, overscale = 1.0) {
-        const ow = img.naturalWidth || img.width;
-        const oh = img.naturalHeight || img.height;
-
-        const scale = Math.min(SIZE / ow, SIZE / oh) * overscale;
-        const w = ow * scale;
-        const h = oh * scale;
-
-        const x = (SIZE - w) / 2;
-        const y = (SIZE - h) / 2;
-
-        ctx.drawImage(img, x, y, w, h);
-      }
-
-      // Banner mode: scaled and anchored to bottom
-      function drawOverlayBottom(img, scaleFactor = 1.0, yNudgePx = 0) {
-        const ow = img.naturalWidth || img.width;
-        const oh = img.naturalHeight || img.height;
-
-        const baseScale = Math.min(SIZE / ow, SIZE / oh);
-        const scale = baseScale * scaleFactor;
-
-        const w = ow * scale;
-        const h = oh * scale;
-
-        const x = (SIZE - w) / 2;
-        const y = (SIZE - h) + yNudgePx;
-
-        ctx.drawImage(img, x, y, w, h);
-      }
-
-      async function render() {
-        setError("");
-        elDownload.disabled = true;
-        ctx.clearRect(0, 0, SIZE, SIZE);
-
-        if (!userImg) {
-          setStatus("Add a photo to begin.");
-          return;
-        }
-
-        try {
-          // 1) Photo
-          drawCover(userImg, 0, 0, SIZE, SIZE);
-
-          // 2) Overlay
-          const overlaySrc = getMode() === "circle" ? ASSETS.circleFrame : ASSETS.cornerFrame;
-          const overlay = await loadImage(overlaySrc);
-
-          if (getMode() === "corner") {
-            // Tune these two numbers to move the banner:
-            // - scaleFactor smaller => more padding around it
-            // - yNudgePx positive => moves overlay DOWN (if your PNG has transparent bottom padding)
-            drawOverlayBottom(overlay, 0.90, +220);
-          } else {
-            // Tune overscale if circle edge shows tiny gaps
-            drawOverlayContain(overlay, 1.12);
-          }
-
-          // 3) Export
-          canvas.toBlob((blob) => {
-            if (!blob) { setError("PNG export failed in this browser."); return; }
-            if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
-            lastBlobUrl = URL.createObjectURL(blob);
-            elDownload.disabled = false;
-            setStatus("Ready to download.");
-          }, "image/png");
-
-        } catch (e) {
-          setError(e.message || String(e));
-        }
-      }
-
-      function download() {
-        if (!lastBlobUrl) return;
-        const a = document.createElement("a");
-        a.href = lastBlobUrl;
-        a.download = "Vote-for-Daley.png";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      }
-
-      async function handleFilePick(ev) {
-        const f = ev.target.files && ev.target.files[0];
-
-        // Reset so picking the same file twice still triggers change
-        ev.target.value = "";
-
-        if (!f) return;
-        try {
-          userImg = await readFileAsImage(f);
-          await render();
-        } catch (e) {
-          userImg = null;
-          setError(e.message || String(e));
-        }
-      }
-
-      // Buttons open the correct picker
-      btnSelfie.addEventListener("click", () => elFileSelfie.click());
-      btnUpload.addEventListener("click", () => elFileUpload.click());
-
-      // Handle both inputs
-      elFileSelfie.addEventListener("change", handleFilePick);
-      elFileUpload.addEventListener("change", handleFilePick);
-
-      modeSwitch.addEventListener("click", async () => {
-        setMode(getMode() === "circle" ? "corner" : "circle");
-        await render();
-      });
-
-      elDownload.addEventListener("click", download);
-
-      // Init
-      setMode("circle");
-      setStatus("Add a photo to begin.");
-
-      // Optional logo: hide if missing so it never looks broken
-      const logo = document.getElementById("siteLogo");
-      if (logo) {
-        logo.addEventListener("error", () => { logo.style.display = "none"; });
-      }
-    })();
-  </script>
-
-  <input name="cookieData" type="hidden"
-    data-cookie-cookiesAlertType='1'
-    data-cookie-customDialogSelector='null'
-    data-cookie-colorText='#424a4d'
-    data-cookie-colorBg='rgb(255, 255, 255)'
-    data-cookie-opacityOverlay='0'
-    data-cookie-bgOpacity='27'
-    data-cookie-textButton='OK'
-    data-cookie-rejectText='REJECT'
-    data-cookie-colorButton='#ea0000'
-    data-cookie-rejectColor='#ffffff'
-    data-cookie-colorLink='#424a4d'
-    data-cookie-underlineLink='true'
-    data-cookie-text="We use cookies to give you the best experience as specified in the <a href='privacy.html'>cookie policy</a>.">
-
-  <div id="scrollToTop" class="scrollToTop mbr-arrow-up">
-    <a style="text-align: center;">
-      <i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i>
-    </a>
   </div>
-  <input name="animation" type="hidden">
+</section>
+
+<!-- ===== Mobirise scripts (needed for site) ===== -->
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/theme/js/script.js"></script>
+
+<!-- =========================
+PROFILE MAKER LOGIC
+Required files in SAME folder as this HTML:
+  - circle.png
+  - corner.png   (banner overlay)
+========================= -->
+<script>
+(() => {
+  const SIZE = 1080;
+
+  // Assets (same folder as this HTML)
+  const ASSETS = {
+    circle: "circle.png",
+    banner: "corner.png"
+  };
+
+  const btnSelfie  = document.getElementById("btnSelfie");
+  const btnUpload  = document.getElementById("btnUpload");
+  const fileSelfie = document.getElementById("fileSelfie");
+  const fileUpload = document.getElementById("fileUpload");
+
+  const toggle      = document.getElementById("toggle");
+  const labelCircle = document.getElementById("labelCircle");
+  const labelBanner = document.getElementById("labelBanner");
+
+  const elDownload = document.getElementById("download");
+  const elStatus   = document.getElementById("status");
+
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d");
+
+  let mode = "circle";     // "circle" | "banner"
+  let userImg = null;
+  let lastBlobUrl = null;
+
+  // Cache overlay images
+  const cache = new Map();
+  function loadImage(src){
+    if (cache.has(src)) return cache.get(src);
+    const p = new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("Missing design file: " + src));
+      img.src = src;
+    });
+    cache.set(src, p);
+    return p;
+  }
+
+  function setStatus(msg){
+    elStatus.textContent = msg;
+  }
+
+  // Center-crop cover
+  function drawCover(img, dx, dy, dw, dh){
+    const iw = img.naturalWidth || img.width;
+    const ih = img.naturalHeight || img.height;
+
+    const scale = Math.max(dw / iw, dh / ih);
+    const sw = dw / scale;
+    const sh = dh / scale;
+
+    const sx = (iw - sw) / 2;
+    const sy = (ih - sh) / 2;
+
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+  }
+
+  function drawOverlayContain(img, overscale = 1.0){
+    const ow = img.naturalWidth || img.width;
+    const oh = img.naturalHeight || img.height;
+
+    const scale = Math.min(SIZE / ow, SIZE / oh) * overscale;
+    const w = ow * scale;
+    const h = oh * scale;
+
+    const x = (SIZE - w) / 2;
+    const y = (SIZE - h) / 2;
+
+    ctx.drawImage(img, x, y, w, h);
+  }
+
+  function drawOverlayBottom(img, scaleFactor = 1.0, yNudgePx = 0){
+    const ow = img.naturalWidth || img.width;
+    const oh = img.naturalHeight || img.height;
+
+    const baseScale = Math.min(SIZE / ow, SIZE / oh);
+    const scale = baseScale * scaleFactor;
+
+    const w = ow * scale;
+    const h = oh * scale;
+
+    const x = (SIZE - w) / 2;
+    const y = (SIZE - h) + yNudgePx;
+
+    ctx.drawImage(img, x, y, w, h);
+  }
+
+  async function render(){
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    elDownload.disabled = true;
+
+    if (!userImg){
+      setStatus("Add a photo to begin.");
+      return;
+    }
+
+    // 1) Photo
+    drawCover(userImg, 0, 0, SIZE, SIZE);
+
+    // 2) Overlay
+    const overlaySrc = mode === "circle" ? ASSETS.circle : ASSETS.banner;
+    const overlay = await loadImage(overlaySrc);
+
+    if (mode === "banner"){
+      // Tune these if needed
+      drawOverlayBottom(overlay, 0.90, +220);
+    } else {
+      drawOverlayContain(overlay, 1.12);
+    }
+
+    // 3) Export as blob
+    canvas.toBlob((blob) => {
+      if (!blob){
+        setStatus("PNG export failed in this browser.");
+        return;
+      }
+      if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+      lastBlobUrl = URL.createObjectURL(blob);
+      elDownload.disabled = false;
+      setStatus("Ready to download.");
+    }, "image/png");
+  }
+
+  function download(){
+    if (!lastBlobUrl) return;
+    const a = document.createElement("a");
+    a.href = lastBlobUrl;
+    a.download = "Vote-for-Daley.png";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  function readFileAsImage(file){
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("That photo could not be opened.")); };
+      img.src = url;
+    });
+  }
+
+  async function handlePick(ev){
+    const f = ev.target.files && ev.target.files[0];
+    ev.target.value = "";
+    if (!f) return;
+    try{
+      userImg = await readFileAsImage(f);
+      await render();
+    }catch(err){
+      userImg = null;
+      setStatus(err.message || String(err));
+    }
+  }
+
+  function setMode(next){
+    mode = next;
+    toggle.dataset.mode = next;
+    labelCircle.classList.toggle("active", next === "circle");
+    labelBanner.classList.toggle("active", next === "banner");
+    render();
+  }
+
+  // Wire up buttons
+  btnSelfie.addEventListener("click", () => fileSelfie.click());
+  btnUpload.addEventListener("click", () => fileUpload.click());
+
+  fileSelfie.addEventListener("change", handlePick);
+  fileUpload.addEventListener("change", handlePick);
+
+  toggle.addEventListener("click", () => {
+    setMode(mode === "circle" ? "banner" : "circle");
+  });
+
+  labelCircle.addEventListener("click", () => setMode("circle"));
+  labelBanner.addEventListener("click", () => setMode("banner"));
+
+  elDownload.addEventListener("click", download);
+
+  // Init
+  setMode("circle");
+  setStatus("Add a photo to begin.");
+})();
+</script>
 
 </body>
 </html>
