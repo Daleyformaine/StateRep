@@ -36,37 +36,6 @@
       border: 1px solid rgba(255,255,255,0.12);
     }
 
-    /* Page UI logo (NOT part of the exported image) */
-    #profile-tool .siteLogo {
-      position: fixed;
-      top: calc(20px + env(safe-area-inset-top));
-      left: calc(20px + env(safe-area-inset-left));
-      width: 140px;
-      height: auto;
-      z-index: 1000;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-    }
-
-    /* Mobile layout */
-    @media (max-width: 600px) {
-      #profile-tool .toolBody {
-        padding-top: calc(16px + env(safe-area-inset-top));
-        padding-left: calc(16px + env(safe-area-inset-left));
-        padding-right: calc(16px + env(safe-area-inset-right));
-        padding-bottom: calc(16px + env(safe-area-inset-bottom));
-        background-attachment: scroll;
-      }
-      #profile-tool .toolBody.hasLogo { padding-top: calc(120px + env(safe-area-inset-top)); }
-      #profile-tool .siteLogo {
-        top: calc(12px + env(safe-area-inset-top));
-        left: calc(12px + env(safe-area-inset-left));
-        width: 110px;
-      }
-    }
-
     #profile-tool .wrap { max-width: 820px; margin: 0 auto; display: grid; gap: 16px; }
     #profile-tool .card {
       background: rgba(7, 10, 22, 0.72);
@@ -175,7 +144,6 @@
       <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
           <div class="toolBody">
-            <img id="siteLogo" src="logo.png" class="siteLogo" alt="Logo" />
 
             <div class="wrap">
               <div class="card">
