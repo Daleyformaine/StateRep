@@ -28,22 +28,47 @@
     #profile-tool { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 
     #profile-tool .toolBody {
-      margin: 0;
-      padding: 24px;
-      color: #fff;
-      background: #0b1020 url("bg.jpg") center/cover no-repeat fixed;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      border: 0;
     }
 
     #profile-tool .wrap { max-width: 820px; margin: 0 auto; display: grid; gap: 16px; }
-    #profile-tool .card {
-      background: rgba(7, 10, 22, 0.72);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px;
-      padding: 16px;
-      backdrop-filter: blur(10px);
+/* Make cards match Mobirise section styling */
+    #profile-tool .card{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 18px;
+      backdrop-filter: blur(8px);
     }
+
+/* Match Mobirise/Bootstrap button feel */
+    #profile-tool .btn{
+      background: transparent;
+      border: 2px solid currentColor;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+    }
+
+/* Use the site’s red accent (you already have #ea0000 in cookie button settings) */
+    #profile-tool .btn,
+    #profile-tool .pill.on{
+      color: #ea0000;
+    }
+
+    #profile-tool .btn:hover{
+      background: rgba(234,0,0,0.12);
+    }
+
+/* Make the toggle match accent */
+    #profile-tool .toggle{
+      background: rgba(234,0,0,0.18);
+      border-color: rgba(234,0,0,0.35);
+    }
+
     #profile-tool h1 { margin: 0 0 10px; font-size: 18px; font-weight: 700; color: #fff; }
     #profile-tool .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
     #profile-tool .left { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
@@ -56,15 +81,7 @@
       background: rgba(0,0,0,0.22);
     }
     #profile-tool input[type="file"] { color: #fff; max-width: 260px; }
-    #profile-tool .btn {
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-weight: 650;
-    }
+
     #profile-tool .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     #profile-tool .toggleWrap { display: flex; flex-direction: column; gap: 6px; }
