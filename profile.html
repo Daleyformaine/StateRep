@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Join Team Daley</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      color: #fff;
+      background: #0b1020 url("bg.jpg") center/cover no-repeat fixed;
+    }
+
+    /* Page UI logo (NOT part of the exported image) */
+    .siteLogo {
+      position: fixed;
+      top: calc(20px + env(safe-area-inset-top));
+      left: calc(20px + env(safe-area-inset-left));
+      width: 140px;
+      height: auto;
+      z-index: 1000;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.45));
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 600px) {
+      /* Default: do NOT reserve logo space unless the logo actually loads */
+      body {
+        padding-top: calc(16px + env(safe-area-inset-top));
+        padding-left: calc(16px + env(safe-area-inset-left));
+        padding-right: calc(16px + env(safe-area-inset-right));
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+        background-attachment: scroll; /* mobile-friendly */
+      }
+
+      /* Only reserve room for the fixed logo if it successfully loads */
+      body.hasLogo {
+        padding-top: calc(120px + env(safe-area-inset-top));
+      }
+
+      .siteLogo {
+        top: calc(12px + env(safe-area-inset-top));
+        left: calc(12px + env(safe-area-inset-left));
+        width: 110px;
+      }
+    }
+
+    .wrap { max-width: 820px; margin: 0 auto; display: grid; gap: 16px; }
+    .card {
+      background: rgba(7, 10, 22, 0.72);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+    h1 { margin: 0 0 10px; font-size: 18px; font-weight: 700; }
+    .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    .left { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .small { font-size: 13px; opacity: 0.88; line-height: 1.35; }
+    .error { font-size: 13px; color: #ffb4b4; white-space: pre-wrap; margin-top: 10px; }
+    canvas {
+      width: 100%; max-width: 560px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.22);
+    }
+
+    input[type="file"] { color: #fff; max-width: 260px; }
+
+    .btn {
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 650;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Customer-friendly toggle */
+    .toggleWrap { display: flex; flex-direction: column; gap: 6px; }
+    .toggleRow { display: inline-flex; align-items: center; gap: 10px; user-select: none; }
+    .pill {
+      font-size: 12px; padding: 4px 8px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      opacity: 0.9;
+    }
+    .pill.on { opacity: 1; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.12); }
+    .toggle {
+      position: relative; width: 58px; height: 30px; border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.22);
+      cursor: pointer; flex: 0 0 auto;
+    }
+    .knob {
+      position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 999px;
+      background: #fff; transition: transform 160ms ease;
+    }
+    .toggle[data-on="true"] .knob { transform: translateX(28px); }
+
+    .hint { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <!-- UI logo pinned to the page (not part of the generated PNG) -->
+  <img id="siteLogo" src="logo.png" class="siteLogo" alt="Logo" />
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Add this to your social media profile!</h1>
+
+      <div class="row">
+        <div class="left">
+          <div>
+            <div class="small">Add your photo</div>
+
+            <!-- Two-button UX: always gives the user the option -->
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px;">
+              <button class="btn" type="button" id="btnSelfie">Take Selfie</button>
+              <button class="btn" type="button" id="btnUpload">Upload Photo</button>
+            </div>
+
+            <!-- Hidden inputs -->
+            <input id="fileSelfie" type="file" accept="image/*" capture="user" style="display:none;" />
+            <input id="fileUpload" type="file" accept="image/*" style="display:none;" />
+          </div>
+
+          <div class="toggleWrap">
+            <div class="small">Style</div>
+            <div class="toggleRow" id="modeSwitch" aria-label="Frame style toggle">
+              <span class="pill on" id="labelCircle">Circle</span>
+              <div class="toggle" id="toggle" data-on="false" role="switch" aria-checked="false">
+                <div class="knob"></div>
+              </div>
+              <span class="pill" id="labelCorner">Banner</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="download" class="btn" disabled>Download PNG</button>
+      </div>
+
+      <div id="status" class="small hint">Add a photo to begin.</div>
+      <div id="err" class="error"></div>
+    </div>
+
+    <div class="card">
+      <div class="small" style="margin-bottom: 10px;">Preview</div>
+      <canvas id="c" width="1080" height="1080"></canvas>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const SIZE = 1080;
+
+      // Public-facing assets (keep in same folder as this page)
+      const ASSETS = {
+        circleFrame: "circle.png",
+        cornerFrame: "corner.png"
+      };
+
+      const elDownload = document.getElementById("download");
+      const elStatus = document.getElementById("status");
+      const elErr = document.getElementById("err");
+
+      const modeSwitch = document.getElementById("modeSwitch");
+      const toggle = document.getElementById("toggle");
+      const labelCircle = document.getElementById("labelCircle");
+      const labelCorner = document.getElementById("labelCorner");
+
+      const canvas = document.getElementById("c");
+      const ctx = canvas.getContext("2d");
+
+      // Two input flow
+      const elFileSelfie = document.getElementById("fileSelfie");
+      const elFileUpload = document.getElementById("fileUpload");
+      const btnSelfie = document.getElementById("btnSelfie");
+      const btnUpload = document.getElementById("btnUpload");
+
+      let userImg = null;
+      let lastBlobUrl = null;
+
+      // Cache images so re-rendering is instant
+      const cache = new Map();
+      function loadImage(src) {
+        if (cache.has(src)) return cache.get(src);
+        const p = new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error("One of the design files is missing. Please contact the site owner."));
+          img.src = src;
+        });
+        cache.set(src, p);
+        return p;
+      }
+
+      const setError = (msg) => (elErr.textContent = msg || "");
+      const setStatus = (msg) => (elStatus.textContent = msg || "");
+
+      function getMode() {
+        return toggle.dataset.on === "true" ? "corner" : "circle";
+      }
+
+      function setMode(mode) {
+        const on = mode === "corner";
+        toggle.dataset.on = on ? "true" : "false";
+        toggle.setAttribute("aria-checked", on ? "true" : "false");
+        labelCircle.classList.toggle("on", !on);
+        labelCorner.classList.toggle("on", on);
+      }
+
+      function readFileAsImage(file) {
+        return new Promise((resolve, reject) => {
+          const url = URL.createObjectURL(file);
+          const img = new Image();
+          img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+          img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("That photo could not be opened. Please try a different image.")); };
+          img.src = url;
+        });
+      }
+
+      // center-crop cover
+      function drawCover(img, dx, dy, dw, dh) {
+        const iw = img.naturalWidth || img.width;
+        const ih = img.naturalHeight || img.height;
+
+        const scale = Math.max(dw / iw, dh / ih);
+        const sw = dw / scale;
+        const sh = dh / scale;
+
+        const sx = (iw - sw) / 2;
+        const sy = (ih - sh) / 2;
+
+        ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+      }
+
+      // Draw overlay without distortion + optional overscale (if asset has padding)
+      function drawOverlayContain(img, overscale = 1.0) {
+        const ow = img.naturalWidth || img.width;
+        const oh = img.naturalHeight || img.height;
+
+        const scale = Math.min(SIZE / ow, SIZE / oh) * overscale;
+        const w = ow * scale;
+        const h = oh * scale;
+
+        const x = (SIZE - w) / 2;
+        const y = (SIZE - h) / 2;
+
+        ctx.drawImage(img, x, y, w, h);
+      }
+
+      // Corner mode: 90% size + anchored to bottom, centered horizontally
+      function drawOverlayBottom(img, scaleFactor = 1.0, yNudgePx = 0) {
+        const ow = img.naturalWidth || img.width;
+        const oh = img.naturalHeight || img.height;
+
+        const baseScale = Math.min(SIZE / ow, SIZE / oh);
+        const scale = baseScale * scaleFactor;
+
+        const w = ow * scale;
+        const h = oh * scale;
+
+        const x = (SIZE - w) / 2;
+        const y = (SIZE - h) + yNudgePx;
+
+        ctx.drawImage(img, x, y, w, h);
+      }
+
+      async function render() {
+        setError("");
+        elDownload.disabled = true;
+        ctx.clearRect(0, 0, SIZE, SIZE);
+
+        if (!userImg) {
+          setStatus("Add a photo to begin.");
+          return;
+        }
+
+        try {
+          // 1) Photo
+          drawCover(userImg, 0, 0, SIZE, SIZE);
+
+          // 2) Frame overlay
+          const overlaySrc = getMode() === "circle" ? ASSETS.circleFrame : ASSETS.cornerFrame;
+          const overlay = await loadImage(overlaySrc);
+
+          if (getMode() === "corner") {
+            // 90% size, bottom anchored
+            // If your PNG has transparent bottom padding, set yNudgePx to something like +20
+            drawOverlayBottom(overlay, 0.90, +220);
+          } else {
+            // keep existing behavior for circle
+            const OVERLAY_OVERSCALE = 1.12;
+            drawOverlayContain(overlay, OVERLAY_OVERSCALE);
+          }
+
+          // Export
+          canvas.toBlob((blob) => {
+            if (!blob) { setError("PNG export failed in this browser."); return; }
+            if (lastBlobUrl) URL.revokeObjectURL(lastBlobUrl);
+            lastBlobUrl = URL.createObjectURL(blob);
+            elDownload.disabled = false;
+            setStatus("Ready to download.");
+          }, "image/png");
+
+        } catch (e) {
+          setError(e.message || String(e));
+        }
+      }
+
+      function download() {
+        if (!lastBlobUrl) return;
+        const a = document.createElement("a");
+        a.href = lastBlobUrl;
+        a.download = `Voting-for-Wessels.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      async function handleFilePick(ev) {
+        const f = ev.target.files && ev.target.files[0];
+
+        // reset so picking the same file twice still triggers "change"
+        ev.target.value = "";
+
+        if (!f) return;
+        try {
+          userImg = await readFileAsImage(f);
+          await render();
+        } catch (e) {
+          userImg = null;
+          setError(e.message || String(e));
+        }
+      }
+
+      // Buttons open the appropriate picker
+      btnSelfie.addEventListener("click", () => elFileSelfie.click());
+      btnUpload.addEventListener("click", () => elFileUpload.click());
+
+      // Handle both inputs with one handler
+      elFileSelfie.addEventListener("change", handleFilePick);
+      elFileUpload.addEventListener("change", handleFilePick);
+
+      modeSwitch.addEventListener("click", async () => {
+        setMode(getMode() === "circle" ? "corner" : "circle");
+        await render();
+      });
+
+      elDownload.addEventListener("click", download);
+
+      // init
+      setMode("circle");
+      setStatus("Add a photo to begin.");
+
+      // Logo load detection: only reserve space if logo successfully loads
+      const logo = document.getElementById("siteLogo");
+      if (logo) {
+        logo.addEventListener("load", () => {
+          document.body.classList.add("hasLogo");
+        });
+
+        logo.addEventListener("error", () => {
+          document.body.classList.remove("hasLogo");
+          logo.style.display = "none";
+        });
+
+        // If cached and already loaded
+        if (logo.complete && logo.naturalWidth > 0) {
+          document.body.classList.add("hasLogo");
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
