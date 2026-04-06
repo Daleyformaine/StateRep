@@ -44,19 +44,47 @@
       flex-direction: column;
     }
 
-    /* Remove default spacing so the donate form owns the page */
+    .menu,
+    .footer2 {
+      flex-shrink: 0;
+    }
+
     .donate-fullscreen-section {
+      position: relative;
       flex: 1 0 auto;
       display: flex;
-      padding: 0 !important;
+      align-items: center;
+      justify-content: center;
+      padding: 24px !important;
       margin: 0 !important;
-      background: #ffffff;
+      background-color: #0f172a;
+      background-image: url("assets/images/freedomflag.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+    }
+
+    .donate-fullscreen-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 0;
     }
 
     .donate-frame-wrap {
+      position: relative;
+      z-index: 1;
       width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     .donate-frame {
@@ -65,15 +93,20 @@
       display: block;
       flex: 1 1 auto;
       min-height: 700px;
+      background: #fff;
     }
 
-    /* Prevent extra white space from Mobirise sections */
-    .menu,
-    .footer2 {
-      flex-shrink: 0;
+    @media (max-width: 991px) {
+      .donate-fullscreen-section {
+        padding: 16px !important;
+      }
+
+      .donate-frame-wrap {
+        max-width: 100%;
+        border-radius: 12px;
+      }
     }
 
-    /* Better behavior on smaller screens */
     @media (max-width: 768px) {
       .donate-frame {
         min-height: 900px;
@@ -168,15 +201,19 @@
     function sizeDonateFrame() {
       const nav = document.querySelector('.menu');
       const footer = document.querySelector('.footer2');
+      const section = document.querySelector('.donate-fullscreen-section');
       const frame = document.getElementById('anedot-frame');
 
-      if (!frame) return;
+      if (!frame || !section) return;
 
       const navHeight = nav ? nav.offsetHeight : 0;
       const footerHeight = footer ? footer.offsetHeight : 0;
+      const sectionStyles = window.getComputedStyle(section);
+      const sectionPaddingTop = parseInt(sectionStyles.paddingTop, 10) || 0;
+      const sectionPaddingBottom = parseInt(sectionStyles.paddingBottom, 10) || 0;
       const viewportHeight = window.innerHeight;
 
-      const availableHeight = viewportHeight - navHeight - footerHeight;
+      const availableHeight = viewportHeight - navHeight - footerHeight - sectionPaddingTop - sectionPaddingBottom;
       frame.style.height = (availableHeight > 500 ? availableHeight : 500) + 'px';
     }
 
